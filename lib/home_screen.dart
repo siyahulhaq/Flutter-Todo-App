@@ -123,12 +123,11 @@ class _MyHomePageState extends State<MyHomePage> {
         body: SafeArea(
           child: Column(
             children: [
-              addContainer,
               Expanded(
                 child: ListView.builder(
                   itemCount: items.length,
                   itemBuilder: (context, index) {
-                    return Container(
+                    var item = Container(
                         alignment: Alignment.center,
                         margin: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
@@ -174,6 +173,37 @@ class _MyHomePageState extends State<MyHomePage> {
                             },
                           ),
                         ));
+                    if (index == 0) {
+                      // return the header
+                      return Column(
+                        children: [
+                          addContainer,
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: Text(
+                              'Todo List',
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: Text(
+                              '${items.length} items',
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          item
+                        ],
+                      );
+                    }
+                    index -= 1;
+                    return item;
                   },
                 ),
               ),
